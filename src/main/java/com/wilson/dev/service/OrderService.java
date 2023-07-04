@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wilson.dev.model.Order;
-import com.wilson.dev.model.User;
 import com.wilson.dev.repository.OrderRepository;
 
 @Service
