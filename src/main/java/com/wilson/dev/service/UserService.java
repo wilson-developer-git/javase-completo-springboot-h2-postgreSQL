@@ -12,6 +12,8 @@ import com.wilson.dev.repository.UserRepository;
 import com.wilson.dev.service.exceptions.DatabaseException;
 import com.wilson.dev.service.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 
@@ -42,9 +44,13 @@ public class UserService {
 	}
 
 	public User update(Long userId, User user) {
+		try {
 		User upUser = userRepository.getReferenceById(userId);
 		updateData(upUser, user);
 		return userRepository.save(upUser);
+		}catch(EntityNotFoundException ex) {
+			throw new ResourceNotFoundException(userId);
+		}
 	}
 
 	private void updateData(User upUser, User user) {
